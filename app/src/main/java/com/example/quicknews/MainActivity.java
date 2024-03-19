@@ -1,41 +1,31 @@
 package com.example.quicknews;
 
-import androidx.annotation.NonNull;
+
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
-import androidx.core.app.ActivityCompat;
-import androidx.core.content.ContextCompat;
 import androidx.viewpager.widget.ViewPager;
 
-import android.Manifest;
-import android.content.pm.PackageManager;
 import android.os.Bundle;
-import android.widget.FrameLayout;
-import android.widget.Toast;
 
 import com.google.android.material.tabs.TabItem;
 import com.google.android.material.tabs.TabLayout;
-
-import org.jetbrains.annotations.NotNull;
 
 public class MainActivity extends AppCompatActivity {
     TabLayout tabLayout;
     TabItem home,science,health,technology,entertainment,sports;
     PageAdapter pageAdapter;
-
-
-    //getSupportFragmentManager().beginTransaction().replace(R.id.fr_container,new HomeFragment()).commit();
-    Toolbar toolbar = findViewById(R.id.toolbar);
+    Toolbar toolbar;
 
     String apikey="d659c41a2c3840379b82778eec8fd62f";
-    String[] permissions={"android.permission.INTERNET"};
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_main);
 
-
-
+    //getSupportFragmentManager().beginTransaction().replace(R.id.fr_container,new HomeFragment()).commit();
+        toolbar=findViewById(R.id.toolbar);
         setSupportActionBar(toolbar); //to set action bar on tool bar
 
         home=findViewById(R.id.Home);
@@ -76,7 +66,6 @@ public class MainActivity extends AppCompatActivity {
                                            });
         //to change page on swipe
         viewPager.addOnPageChangeListener(new TabLayout.TabLayoutOnPageChangeListener(tabLayout));
-
     }
 }
 
