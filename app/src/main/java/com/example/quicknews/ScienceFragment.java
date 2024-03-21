@@ -1,9 +1,13 @@
 package com.example.quicknews;
 
+import static android.view.View.GONE;
+import static android.view.View.VISIBLE;
+
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ProgressBar;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -30,6 +34,7 @@ public class ScienceFragment extends Fragment {
     //taking it as private because so many recyle in single activitu and  multiple fragments
     private RecyclerView recyclerViewofScience;
     private String category="science";
+    ProgressBar progressBar;
 
     @Nullable
     @Override
@@ -41,6 +46,8 @@ public class ScienceFragment extends Fragment {
         recyclerViewofScience.setLayoutManager(new LinearLayoutManager(getContext()));
         adapterClass =new AdapterClass(getContext(),modelArrayList);
         recyclerViewofScience.setAdapter(adapterClass);
+        progressBar=v.findViewById(R.id.progressbar);
+        progressBar.setVisibility(VISIBLE);
         findNews();
         return v;
 
@@ -54,6 +61,7 @@ public class ScienceFragment extends Fragment {
                 if(response.isSuccessful()){
                     modelArrayList.addAll(response.body().getArticles());
                     adapterClass.notifyDataSetChanged();
+                    progressBar.setVisibility(GONE);
                 }
 
             }

@@ -1,9 +1,13 @@
 package com.example.quicknews;
 
+import static android.view.View.GONE;
+import static android.view.View.VISIBLE;
+
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ProgressBar;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -29,6 +33,7 @@ public class HealthFragment extends Fragment {
     //taking it as private because so many recyle in single activitu and  multiple fragments
     private RecyclerView recyclerViewofHealth;
     private String category="health";
+    ProgressBar progressBar;
 
     @Nullable
     @Override
@@ -36,11 +41,14 @@ public class HealthFragment extends Fragment {
         //inflater to add scrren on diaplay
         View v=inflater.inflate(R.layout.healthfragment,null);
         recyclerViewofHealth=v.findViewById(R.id.recycleViewHealth);
-
+        progressBar=v.findViewById(R.id.progressbar);
         modelArrayList=new ArrayList<>();
         recyclerViewofHealth.setLayoutManager(new LinearLayoutManager(getContext()));
         adapterClass =new AdapterClass(getContext(),modelArrayList);
         recyclerViewofHealth.setAdapter(adapterClass);
+        progressBar=v.findViewById(R.id.progressbar);
+        progressBar.setVisibility(VISIBLE);
+
         findNews();
         return v;
 
@@ -54,6 +62,8 @@ public class HealthFragment extends Fragment {
                 if(response.isSuccessful()){
                     modelArrayList.addAll(response.body().getArticles());
                     adapterClass.notifyDataSetChanged();
+                    progressBar.setVisibility(GONE);
+
                 }
 
             }

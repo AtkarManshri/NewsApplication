@@ -33,9 +33,9 @@
                 android:maxLines="2"
                 android:padding="5dp"
                 android:text="Main heading here"
+                android:textStyle="bold"
                 android:textColor="@color/black"
-                android:textSize="15sp"
-               >
+                android:textSize="17sp">
 
             </TextView>
             <LinearLayout
@@ -51,13 +51,15 @@
                     android:layout_height="match_parent"
                     android:layout_weight="1"
                     android:ellipsize="end"
-                    android:fontFamily="sans-serif-medium"
+                    android:fontFamily="@font/actor"
+
                     android:maxLines="6"
                     android:padding="5dp"
                     android:text="main  content here"
-                    android:textSize="13sp"
+                    android:textAlignment="textStart"
+                    android:textColor="@color/black"
 
-                    android:textAlignment="textStart">
+                    android:textSize="14sp">
 
                 </TextView>
 

@@ -1,9 +1,13 @@
 package com.example.quicknews;
 
+import static android.view.View.GONE;
+import static android.view.View.VISIBLE;
+
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ProgressBar;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -30,6 +34,7 @@ public class SportsFragment extends Fragment {
     //taking it as private because so many recyle in single activitu and  multiple fragments
     private RecyclerView recyclerViewofSports;
     private String category="sports";
+    ProgressBar progressBar;
 
     @Nullable
     @Override
@@ -41,6 +46,8 @@ public class SportsFragment extends Fragment {
         recyclerViewofSports.setLayoutManager(new LinearLayoutManager(getContext()));
         adapterClass =new AdapterClass(getContext(),modelArrayList);
         recyclerViewofSports.setAdapter(adapterClass);
+        progressBar=v.findViewById(R.id.progressbar);
+        progressBar.setVisibility(VISIBLE);
 
         findNews();
         return v;
@@ -55,6 +62,7 @@ public class SportsFragment extends Fragment {
                 if(response.isSuccessful()){
                     modelArrayList.addAll(response.body().getArticles());
                     adapterClass.notifyDataSetChanged();
+                    progressBar.setVisibility(GONE);
                 }
 
             }

@@ -1,9 +1,12 @@
 package com.example.quicknews;
 
+import static android.view.View.VISIBLE;
+
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ProgressBar;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -27,21 +30,25 @@ public class HomeFragment extends Fragment {
     String country="in";
     //taking it as private because so many recyle in single activitu and  multiple fragments
     RecyclerView recyclerViewofHome;
+    ProgressBar progressBar;
 
 
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+
         View v=inflater.inflate(R.layout.homefragment,null);
-       
+
         recyclerViewofHome=v.findViewById(R.id.recycleViewHome);
         modelArrayList=new ArrayList<>();
         recyclerViewofHome.setLayoutManager(new LinearLayoutManager(getContext()));
         adapterClass =new AdapterClass(getContext(),modelArrayList);
         recyclerViewofHome.setAdapter(adapterClass);
+        progressBar=v.findViewById(R.id.progressbar);
+        progressBar.setVisibility(VISIBLE);
         findNews();
+        //
         return v;
-        
 
     }
 
@@ -52,6 +59,7 @@ public class HomeFragment extends Fragment {
                 if(response.isSuccessful()){
                    modelArrayList.addAll(response.body().getArticles());
                    adapterClass.notifyDataSetChanged();
+                    progressBar.setVisibility(View.GONE);
                 }else {
                     Toast.makeText(getContext(),"Api not fetch",Toast.LENGTH_LONG).show();
                 }
